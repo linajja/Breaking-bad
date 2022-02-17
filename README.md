@@ -9,7 +9,7 @@ _Breaking-bad_
 
 This project is for educational porpuses only. Pull request are welcome, but priority for project authors! Thank you for your cooperation!
 
-Site published at: https://github.com/linajja/3-mergaite
+Site published at: https://linajja.github.io/Breaking-bad/
 
 Design: [Breaking-bad]
 
