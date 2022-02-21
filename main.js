@@ -287,11 +287,20 @@ function createDate(date) {
 function jauniausias(array) {
     let minIndex = 0;
     array.forEach((el, index) => {
-        if (el.metai > array[minIndex].metai) {
+        if (createDate(el.birthday) > createDate(array[minIndex].birthday)) {
             minIndex = index;
         }
     });
     return array[minIndex];
+}
+function vyriausias(array) {
+    let maxIndex = 0;
+    array.forEach((el, index) => {
+        if (createDate(el.birthday) < createDate(array[maxIndex].birthday)) {
+            maxIndex = index;
+        }
+    });
+    return array[maxIndex];
 }
 
 async function allCharacter() {
@@ -305,13 +314,23 @@ async function allCharacter() {
 
 document.getElementById("btn10").addEventListener("click", function () {
     allCharacter().then(data => {
-        let result = data.filter(item => item.birthday.includes(""));
-        result.forEach(item => {
-            let { img, name, birthday, nickname, portrayed } = item;
-            appendCard(createCard(img, name, birthday, nickname, portrayed));
-        })
-    }).catch(error => {
-        console.log(error);
+        let result = data.filter(item => !item.birthday.includes("Unknown"));
+        let { img, name, birthday, nickname, portrayed } = jauniausias(result);
+        appendCard(createCard(img, name, birthday, nickname, portrayed));
     })
 })
+
+document.getElementById("btn11").addEventListener("click", function () {
+    allCharacter().then(data => {
+        let result = data.filter(item => !item.birthday.includes("Unknown"));
+        let { img, name, birthday, nickname, portrayed } = vyriausias(result);
+        appendCard(createCard(img, name, birthday, nickname, portrayed));
+    })
+})
+    .catch(error => {
+        console.log(error);
+    })
+
+
+
 
