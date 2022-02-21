@@ -1,4 +1,5 @@
 
+
 function createCard(niceImg, nameSurname, numberAge, fullNickname, fullPortrayed) {
 
     let newImg = document.createElement("img");
@@ -303,6 +304,8 @@ function vyriausias(array) {
     return array[maxIndex];
 }
 
+
+
 async function allCharacter() {
     const requestURL = 'https://breakingbadapi.com/api/characters';
     const request = new Request(requestURL);
@@ -327,9 +330,60 @@ document.getElementById("btn11").addEventListener("click", function () {
         appendCard(createCard(img, name, birthday, nickname, portrayed));
     })
 })
-    .catch(error => {
+
+
+let star = [1, 2, 3, 4, 5];
+
+function stars(arr) {
+    let parrentDiv = document.createElement("div");
+    arr.forEach(star => {
+        let p = document.createElement("p");
+        p.className = "fa fa-star";
+        p.textContent = star;
+        parrentDiv.append(p);
+    })
+    return parrentDiv
+}
+
+function createCardWithStars(niceImg, nameSurname, numberAge, fullNickname, fullPortrayed, appearance) {
+
+    let newImg = document.createElement("img");
+    newImg.className = "img";
+    newImg.src = niceImg;
+
+    let newName = document.createElement("name");
+    newName.textContent = nameSurname;
+
+    let newAge = document.createElement("age");
+    newAge.textContent = numberAge;
+
+    let newNickname = document.createElement("nickname");
+    newNickname.textContent = fullNickname;
+
+    let newPortrayed = document.createElement("portrayed");
+    newPortrayed.textContent = fullPortrayed;
+
+    let newCard = document.createElement("div");
+    newCard.className = "item";
+
+    newCard.append(newImg, newName, newAge, newNickname, newPortrayed, stars(appearance));
+
+    return newCard;
+};
+
+let btn12 = document.getElementById("btn12");
+btn12.addEventListener("click", function () {
+    allCharacter().then(data => {
+        data.forEach(item => {
+            let { img, name, birthday, nickname, portrayed, appearance } = item;
+            let card = createCardWithStars(img, name, birthday, nickname, portrayed, appearance);
+            appendCard(card);
+        })
+    }).catch(error => {
         console.log(error);
     })
+})
+
 
 
 

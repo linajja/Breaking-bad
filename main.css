@@ -1,4 +1,4 @@
-@import '../components/font-awesome.min.css';
+@import '../font-awesome.min.css';
 
 body,
 body * {
@@ -51,4 +51,8 @@ body * {
     height: 70px;
     margin: 10px 10px;
     padding: 20px 10px;
+}
+.fa-star {
+    color: yellow;
+    size: 20px;
 }
